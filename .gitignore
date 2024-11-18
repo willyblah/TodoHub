@@ -1,0 +1,11 @@
+# Build files and binaries
+build/
+out/
+*.exe
+
+# Log files
+*.log
+
+# IDE files
+.vs/
+.vscode/
