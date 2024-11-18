@@ -1,0 +1,49 @@
+{
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": "windows-release",
+            "displayName": "Release (Windows)",
+            "description": "Using compiler: g++",
+            "generator": "MinGW Makefiles",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "windows-debug",
+            "displayName": "Debug (Windows)",
+            "description": "Using compiler: g++",
+            "generator": "MinGW Makefiles",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "macos-linux-release",
+            "displayName": "Release (MacOS/Linux)",
+            "description": "Using compiler: g++",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "macos-linux-debug",
+            "displayName": "Debug (MacOS/Linux)",
+            "description": "Using compiler: g++",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+    ]
+}
