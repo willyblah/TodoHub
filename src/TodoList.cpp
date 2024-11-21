@@ -18,6 +18,42 @@ void TodoList::DisplayTasks() {
 
 void TodoList::AddTask(const Task& task) { tasks.emplace_back(task); }
 
+void TodoList::RemoveTask(const int index) {
+    if (index < 1 || index > tasks.size()) {
+        std::cerr << "Invalid index.";
+        Sleep(1000);
+        return;
+    }
+    tasks.erase(tasks.begin() + index - 1);
+}
+
+void TodoList::MarkCompleted(const int index) {
+    if (index < 1 || index > tasks.size()) {
+        std::cerr << "Invalid index.";
+        Sleep(1000);
+        return;
+    }
+    tasks[index - 1].isCompleted = true;
+}
+
+void TodoList::MarkNotCompleted(const int index) {
+    if (index < 1 || index > tasks.size()) {
+        std::cerr << "Invalid index.";
+        Sleep(1000);
+        return;
+    }
+    tasks[index - 1].isCompleted = false;
+}
+
+void TodoList::SetDescription(const int index, const std::string& newDescription) {
+    if (index < 1 || index > tasks.size()) {
+        std::cerr << "Invalid index.";
+        Sleep(1000);
+        return;
+    }
+    tasks[index - 1].description = newDescription;
+}
+
 TodoList::Commands TodoList::StrToCommand(const std::string& str) {
     if (str == "add") {
         return ADD;
@@ -29,8 +65,6 @@ TodoList::Commands TodoList::StrToCommand(const std::string& str) {
         return UNCOMPLETE;
     } else if (str == "rn") {
         return RENAME;
-    } else if (str == "mv") {
-        return MOVE;
     } else if (str == "help") {
         return HELP;
     } else if (str == "q") {

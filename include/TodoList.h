@@ -1,7 +1,9 @@
 #ifndef TODOLIST_H
 #define TODOLIST_H
 
+#include <chrono>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "Task.h"
@@ -14,7 +16,6 @@ public:
         COMPLETE,
         UNCOMPLETE,
         RENAME,
-        MOVE,
         HELP,
         QUIT,
         UNKNOWN
@@ -28,9 +29,7 @@ public:
     void MarkCompleted(const int index);
     void MarkNotCompleted(const int index);
 
-    void SetDescription(const int index);
-
-    void MoveTask(const int oldIndex, const int newIndex);
+    void SetDescription(const int index, const std::string& newDescription);
 
     void ViewHelp();
 
@@ -40,6 +39,9 @@ public:
     void SaveTasks(const std::string& filename);
 
     static void ClearTerminal();
+    inline static void Sleep(const int duration) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(duration));
+    }
 
 private:
     std::vector<Task> tasks;
