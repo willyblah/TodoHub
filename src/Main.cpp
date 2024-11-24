@@ -9,6 +9,7 @@ int main() {
     using namespace std;
 
     TodoList todoList;
+    todoList.LoadTasks("tasks.txt");
 
     while (true) {
         TodoList::ClearTerminal();
@@ -95,6 +96,7 @@ int main() {
                     break;
                 }
                 case TodoList::Commands::QUIT:
+                    todoList.SaveTasks("tasks.txt");
                     return 0;
                 case TodoList::Commands::UNKNOWN:
                     cerr << "Invalid command.";

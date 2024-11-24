@@ -1,6 +1,8 @@
 #include "TodoList.h"
 
+#include <algorithm>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -52,6 +54,34 @@ void TodoList::SetDescription(const int index, const std::string& newDescription
         return;
     }
     tasks[index - 1].description = newDescription;
+}
+
+void TodoList::LoadTasks(const std::string& filename) {
+    std::ifstream fin(filename);
+    if (!fin.is_open()) {
+        fin.close();
+        return;
+    }
+    int size;
+    fin >> size;
+    for (int i = 0; i < size; i++) {
+        std::string description;
+        bool isCompleted;
+        fin >> description >> isCompleted;
+        std::replace(description.begin(), description.end(), '_', ' ');
+        AddTask({description, isCompleted});
+    }
+}
+
+void TodoList::SaveTasks(const std::string& filename) {
+    std::ofstream fout(filename);
+    int size = tasks.size();
+    fout << size;
+    for (const Task& task : tasks) {
+        std::string description = task.description;
+        std::replace(description.begin(), description.end(), ' ', '_');
+        fout << "\n" << description << " " << task.isCompleted;
+    }
 }
 
 TodoList::Commands TodoList::StrToCommand(const std::string& str) {

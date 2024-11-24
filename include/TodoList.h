@@ -33,10 +33,10 @@ public:
 
     void ViewHelp();
 
-    TodoList::Commands StrToCommand(const std::string& str);
-
     void LoadTasks(const std::string& filename);
     void SaveTasks(const std::string& filename);
+
+    TodoList::Commands StrToCommand(const std::string& str);
 
     static void ClearTerminal();
     inline static void Sleep(const int duration) {
