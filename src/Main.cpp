@@ -95,6 +95,10 @@ int main() {
                     actionDone = true;
                     break;
                 }
+                case TodoList::Commands::HELP:
+                    todoList.ViewHelp();
+                    actionDone = true;
+                    break;
                 case TodoList::Commands::QUIT:
                     todoList.SaveTasks("tasks.txt");
                     return 0;

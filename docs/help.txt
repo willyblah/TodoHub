@@ -1,0 +1,35 @@
+TODO HUB - HELP
+---------------
+
+Welcome to Todo Hub help! You will find documentation for all the Todo Hub commands here.
+You can access this help screen again by typing the 'help' command.
+
+Command:     add
+Parameter:   the description of the task you want to add
+Description: Adds a task to the end of the to-do list.
+Example:     add Task A
+
+Command:     rm
+Parameter:   the index of the task you want to remove
+Description: Removes a task.
+Example:     rm 3
+
+Command:     do
+Parameter:   the index of the task you want to mark as completed
+Description: Marks a task as completed.
+Example:     do 3
+
+Command:     undo
+Parameter:   the index of the task you want to mark as incomplete
+Description: Marks a task as incomplete.
+Example:     undo 3
+
+Command:     rn
+Parameters:  the index of the task you want to rename, the new description
+Description: Renames a task.
+Example:     rn 3 New task name
+
+Command:     q
+Parameters:  None
+Description: Quits Todo Hub.
+Example:     q
