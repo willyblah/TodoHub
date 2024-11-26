@@ -1,7 +1,9 @@
+// TodoList.cpp - implementation for TodoList class
+
 #include "TodoList.h"
 
-#include <direct.h>
-#include <unistd.h>
+#include <direct.h>  // For _chdir()
+#include <unistd.h>  // For chdir()
 
 #include <algorithm>
 #include <cstdlib>
@@ -63,7 +65,7 @@ void TodoList::SetDescription(const int index, const std::string& newDescription
 void TodoList::ViewHelp() {
     std::string originalWorkingDirectory = std::filesystem::current_path().string();
 
-#ifdef _WIN32
+#ifdef _WIN32  // Change the working directory to docs/
     _chdir("..");
     _chdir("..\\docs");
     std::ifstream fin("help.txt");
@@ -73,11 +75,11 @@ void TodoList::ViewHelp() {
     std::ifstream fin("help.txt");
 #endif
 
+    ClearTerminal();
+
     if (!fin.is_open()) {
         std::cerr << "Error opening file help.txt\n";
     }
-
-    ClearTerminal();
 
     std::string line;
     while (std::getline(fin, line)) {
@@ -88,7 +90,7 @@ void TodoList::ViewHelp() {
     std::cin.get();
     std::cin.get();
 
-#ifdef _WIN32
+#ifdef _WIN32  // Change the working directory back to the program directory
     _chdir(originalWorkingDirectory.c_str());
 #else
     chdir(originalWorkingDirectory.c_str());
@@ -114,11 +116,18 @@ void TodoList::LoadTasks(const std::string& filename) {
 }
 
 void TodoList::SaveTasks(const std::string& filename) {
+    // Example:
+    // 3
+    // Do_homework 0
+    // Shop_for_food 0
+    // Edit_code 1
+
     std::ofstream fout(filename);
     int size = tasks.size();
     fout << size;
     for (const Task& task : tasks) {
         std::string description = task.description;
+        // Convert spaces to underscores
         std::replace(description.begin(), description.end(), ' ', '_');
         fout << "\n" << description << " " << task.isCompleted;
     }
@@ -150,5 +159,5 @@ void TodoList::ClearTerminal() {
     system("cls");
 #else
     system("clear");
-#endif  // _WIN32
+#endif
 }

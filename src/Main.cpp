@@ -1,3 +1,5 @@
+// Main.cpp - the entry point and logic for Todo Hub
+
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -15,7 +17,6 @@ int main() {
         TodoList::ClearTerminal();
         cout << "TODO HUB 1.0.0\n";
         cout << "--------------\n\n";
-
         todoList.DisplayTasks();
 
         bool actionDone = false;
@@ -24,6 +25,7 @@ int main() {
             string commandStr;
             cin >> commandStr;
             TodoList::Commands command = todoList.StrToCommand(commandStr);
+
             switch (command) {
                 case TodoList::Commands::ADD: {
                     string description;
@@ -82,7 +84,7 @@ int main() {
                     string index, newDescription;
                     cin >> index;
                     getline(cin, newDescription);
-                    newDescription.erase(0, 1);
+                    newDescription.erase(0, 1);  // Erase space in front of new description
                     try {
                         stoi(index);
                     } catch (const invalid_argument& e) {

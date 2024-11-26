@@ -1,3 +1,5 @@
+// Task.h - defines the Task struct
+
 #ifndef TASK_H
 #define TASK_H
 
