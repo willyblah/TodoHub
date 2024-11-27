@@ -28,7 +28,10 @@ TODO HUB 1.0.0
 
 ### Direct download
 
-Coming soon!
+**Only Windows and Linux binaries are provided.**
+
+1. Visit the [release page](https://github.com/willyblah/TodoHub/releases).
+2. Download the binary for your system.
 
 ### Build from source
 
@@ -39,7 +42,7 @@ Coming soon!
 
 **Steps**
 
-1. Download the source code from the release page.
+1. Download the source code from the [release page](https://github.com/willyblah/TodoHub/releases).
 2. Extract the source code.
 3. Run the build script for your system.
     - Windows: `build-windows.bat`
