@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 
+#include "Colors.h"
 #include "Task.h"
 #include "TodoList.h"
 
@@ -15,8 +16,10 @@ int main() {
 
     while (true) {
         TodoList::ClearTerminal();
+        cout << YELLOW;
         cout << "TODO HUB 1.0.0\n";
         cout << "--------------\n\n";
+        cout << DEFAULT;
         todoList.DisplayTasks();
 
         bool actionDone = false;
@@ -41,7 +44,7 @@ int main() {
                     try {
                         stoi(index);
                     } catch (const invalid_argument& e) {
-                        cerr << "Parameter " << index << " is not an integer.";
+                        cerr << RED << "Parameter " << index << " is not an integer." << DEFAULT;
                         TodoList::Sleep(1000);
                         actionDone = true;
                         break;
@@ -56,7 +59,7 @@ int main() {
                     try {
                         stoi(index);
                     } catch (const invalid_argument& e) {
-                        cerr << "Parameter " << index << " is not an integer.";
+                        cerr << RED << "Parameter " << index << " is not an integer." << DEFAULT;
                         TodoList::Sleep(1000);
                         actionDone = true;
                         break;
@@ -71,7 +74,7 @@ int main() {
                     try {
                         stoi(index);
                     } catch (const invalid_argument& e) {
-                        cerr << "Parameter " << index << " is not an integer.";
+                        cerr << RED << "Parameter " << index << " is not an integer." << DEFAULT;
                         TodoList::Sleep(1000);
                         actionDone = true;
                         break;
@@ -88,7 +91,7 @@ int main() {
                     try {
                         stoi(index);
                     } catch (const invalid_argument& e) {
-                        cerr << "Parameter " << index << " is not an integer.";
+                        cerr << RED << "Parameter " << index << " is not an integer." << DEFAULT;
                         TodoList::Sleep(1000);
                         actionDone = true;
                         break;
@@ -105,7 +108,7 @@ int main() {
                     todoList.SaveTasks("tasks.txt");
                     return 0;
                 case TodoList::Commands::UNKNOWN:
-                    cerr << "Invalid command.";
+                    cerr << RED << "Invalid command." << DEFAULT;
                     break;
             }
         }

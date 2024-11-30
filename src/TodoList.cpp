@@ -12,12 +12,14 @@
 #include <iostream>
 #include <string>
 
+#include "Colors.h"
+
 void TodoList::DisplayTasks() {
     int i = 1;
     for (const Task& task : tasks) {
-        std::cout << i << ". " << task.description;
+        std::cout << BOLD << i << ". " << task.description << DEFAULT;
         if (task.isCompleted) {
-            std::cout << " [COMPLETED]";
+            std::cout << GREEN << " [COMPLETED]" << DEFAULT;
         }
         std::cout << "\n";
         i++;
@@ -28,7 +30,7 @@ void TodoList::AddTask(const Task& task) { tasks.emplace_back(task); }
 
 void TodoList::RemoveTask(const int index) {
     if (index < 1 || index > tasks.size()) {
-        std::cerr << "Invalid index.";
+        std::cerr << RED << "Invalid index." << DEFAULT;
         Sleep(1000);
         return;
     }
@@ -37,7 +39,7 @@ void TodoList::RemoveTask(const int index) {
 
 void TodoList::MarkCompleted(const int index) {
     if (index < 1 || index > tasks.size()) {
-        std::cerr << "Invalid index.";
+        std::cerr << RED << "Invalid index." << DEFAULT;
         Sleep(1000);
         return;
     }
@@ -46,7 +48,7 @@ void TodoList::MarkCompleted(const int index) {
 
 void TodoList::MarkNotCompleted(const int index) {
     if (index < 1 || index > tasks.size()) {
-        std::cerr << "Invalid index.";
+        std::cerr << RED << "Invalid index." << DEFAULT;
         Sleep(1000);
         return;
     }
@@ -55,7 +57,7 @@ void TodoList::MarkNotCompleted(const int index) {
 
 void TodoList::SetDescription(const int index, const std::string& newDescription) {
     if (index < 1 || index > tasks.size()) {
-        std::cerr << "Invalid index.";
+        std::cerr << RED << "Invalid index." << DEFAULT;
         Sleep(1000);
         return;
     }
@@ -78,7 +80,7 @@ void TodoList::ViewHelp() {
     ClearTerminal();
 
     if (!fin.is_open()) {
-        std::cerr << "Error opening file help.txt\n";
+        std::cerr << RED << "Error opening file help.txt\n" << DEFAULT;
     }
 
     std::string line;
