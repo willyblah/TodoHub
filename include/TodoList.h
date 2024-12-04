@@ -4,6 +4,7 @@
 #define TODOLIST_H
 
 #include <chrono>
+#include <ctime>
 #include <string>
 #include <thread>
 #include <vector>
@@ -18,6 +19,7 @@ public:
         COMPLETE,
         UNCOMPLETE,
         RENAME,
+        SET_DUE_DATE,
         HELP,
         QUIT,
         UNKNOWN
@@ -40,6 +42,9 @@ public:
 
     // Sets the description of the task at a specified index.
     void SetDescription(const int index, const std::string& newDescription);
+
+    // Sets the due date of the task at a specified intex.
+    void SetDueDate(const int index, const std::tm& date);
 
     // Displays the help document (docs/help.txt).
     void ViewHelp();

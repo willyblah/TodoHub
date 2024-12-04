@@ -1,6 +1,9 @@
 // Main.cpp - the entry point and logic for Todo Hub
 
+#include <ctime>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -97,6 +100,30 @@ int main() {
                         break;
                     }
                     todoList.SetDescription(stoi(index), newDescription);
+                    actionDone = true;
+                    break;
+                }
+                case TodoList::Commands::SET_DUE_DATE: {
+                    string index, dateStr;
+                    cin >> index >> dateStr;
+                    try {
+                        stoi(index);
+                    } catch (const invalid_argument& e) {
+                        cerr << RED << "Parameter " << index << " is not an integer." << DEFAULT;
+                        TodoList::Sleep(1000);
+                        actionDone = true;
+                        break;
+                    }
+                    tm date{};
+                    istringstream ss(dateStr);
+                    ss >> get_time(&date, "%Y/%m/%d");
+                    if (ss.fail() || date.tm_year < 0 || date.tm_year > 1100) {
+                        cerr << RED << "Failed to parse date. Date should be in YYYY/MM/DD format." << DEFAULT;
+                        TodoList::Sleep(1000);
+                        actionDone = true;
+                        break;
+                    }
+                    todoList.SetDueDate(stoi(index), date);
                     actionDone = true;
                     break;
                 }

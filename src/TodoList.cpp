@@ -7,8 +7,10 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <ctime>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <string>
 
@@ -18,6 +20,10 @@ void TodoList::DisplayTasks() {
     int i = 1;
     for (const Task& task : tasks) {
         std::cout << BOLD << i << ". " << task.description << DEFAULT;
+        if (task.dueDate.tm_year >= 0 && task.dueDate.tm_mon >= 0 && task.dueDate.tm_mday > 0) {
+            std::cout << BLUE << " (Due " << task.dueDate.tm_year + 1900 << "/"
+                      << task.dueDate.tm_mon + 1 << "/" << task.dueDate.tm_mday << ")" << DEFAULT;
+        }
         if (task.isCompleted) {
             std::cout << GREEN << " [COMPLETED]" << DEFAULT;
         }
@@ -62,6 +68,15 @@ void TodoList::SetDescription(const int index, const std::string& newDescription
         return;
     }
     tasks[index - 1].description = newDescription;
+}
+
+void TodoList::SetDueDate(const int index, const std::tm& date) {
+    if (index < 1 || index > tasks.size()) {
+        std::cerr << RED << "Invalid index." << DEFAULT;
+        Sleep(1000);
+        return;
+    }
+    tasks[index - 1].dueDate = date;
 }
 
 void TodoList::ViewHelp() {
@@ -110,9 +125,10 @@ void TodoList::LoadTasks(const std::string& filename) {
     for (int i = 0; i < size; i++) {
         std::string description;
         bool isCompleted;
-        fin >> description >> isCompleted;
+        std::tm date;
+        fin >> description >> isCompleted >> date.tm_year >> date.tm_mon >> date.tm_mday;
         std::replace(description.begin(), description.end(), '_', ' ');
-        AddTask({description, isCompleted});
+        AddTask({description, isCompleted, date});
     }
     fin.close();
 }
@@ -120,7 +136,7 @@ void TodoList::LoadTasks(const std::string& filename) {
 void TodoList::SaveTasks(const std::string& filename) {
     // Example:
     // 3
-    // Do_homework 0
+    // Do_homework 0 125 8 25
     // Shop_for_food 0
     // Edit_code 1
 
@@ -131,7 +147,9 @@ void TodoList::SaveTasks(const std::string& filename) {
         std::string description = task.description;
         // Convert spaces to underscores
         std::replace(description.begin(), description.end(), ' ', '_');
-        fout << "\n" << description << " " << task.isCompleted;
+        fout << "\n"
+             << description << " " << task.isCompleted << " " << task.dueDate.tm_year << " "
+             << task.dueDate.tm_mon << " " << task.dueDate.tm_mday;
     }
     fout.close();
 }
@@ -147,6 +165,8 @@ TodoList::Commands TodoList::StrToCommand(const std::string& str) {
         return UNCOMPLETE;
     } else if (str == "rn") {
         return RENAME;
+    } else if (str == "due") {
+        return SET_DUE_DATE;
     } else if (str == "help") {
         return HELP;
     } else if (str == "q") {
