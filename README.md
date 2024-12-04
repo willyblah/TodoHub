@@ -6,23 +6,14 @@
 
 ## Features
 
-- Basic to-do list managing
+- Add, remove, rename, and complete tasks
+- Set due dates for tasks
+- Colorful interface
 - Saves your to-do list to a file
 
 ## Screenshot
 
-```
-TODO HUB 1.0.0
---------------
-
-1. Task A
-2. Task B
-3. Task C
-4. Task D [COMPLETED]
-5. Task E [COMPLETED]
-
-> rm 5
-```
+![Screenshot of Todo Hub](demo.png)
 
 ## Installation
 
@@ -40,16 +31,16 @@ TODO HUB 1.0.0
 
 ### Build from source
 
-**Requirements**
+#### Requirements
 
 - GCC (Windows/Linux) or Clang (macOS)
 - CMake 3.10 or later
 
-**Steps**
+#### Steps
 
 1. Download the source code from the [latest release](https://github.com/willyblah/TodoHub/releases/latest).
 2. Extract the source code.
-3. Run the build script for your system.
+3. Run the build script for your system. Make sure you have permission to execute the script.
     - Windows: `build-windows.bat`
     - macOS: `build-macos.sh`
     - Linux: `build-linux.sh`
@@ -60,5 +51,5 @@ TODO HUB 1.0.0
 
 ## Support
 
-Help content can be found in `help.txt`. You can also access help by typing the
+Help content can be found in `docs/help.txt`. You can also access help by typing the
 `help` command in Todo Hub.
