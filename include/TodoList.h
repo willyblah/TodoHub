@@ -68,6 +68,9 @@ public:
 
 private:
     std::vector<Task> tasks;
+
+    // Checks if an index is valid and outputs an error message if invalid.
+    bool IsIndexValid(const int index);
 };
 
 #endif  // TODOLIST_H

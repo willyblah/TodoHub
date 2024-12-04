@@ -35,45 +35,35 @@ void TodoList::DisplayTasks() {
 void TodoList::AddTask(const Task& task) { tasks.emplace_back(task); }
 
 void TodoList::RemoveTask(const int index) {
-    if (index < 1 || index > tasks.size()) {
-        std::cerr << RED << "Invalid index." << DEFAULT;
-        Sleep(1000);
+    if (!IsIndexValid(index)) {
         return;
     }
     tasks.erase(tasks.begin() + index - 1);
 }
 
 void TodoList::MarkCompleted(const int index) {
-    if (index < 1 || index > tasks.size()) {
-        std::cerr << RED << "Invalid index." << DEFAULT;
-        Sleep(1000);
+    if (!IsIndexValid(index)) {
         return;
     }
     tasks[index - 1].isCompleted = true;
 }
 
 void TodoList::MarkNotCompleted(const int index) {
-    if (index < 1 || index > tasks.size()) {
-        std::cerr << RED << "Invalid index." << DEFAULT;
-        Sleep(1000);
+    if (!IsIndexValid(index)) {
         return;
     }
     tasks[index - 1].isCompleted = false;
 }
 
 void TodoList::SetDescription(const int index, const std::string& newDescription) {
-    if (index < 1 || index > tasks.size()) {
-        std::cerr << RED << "Invalid index." << DEFAULT;
-        Sleep(1000);
+    if (!IsIndexValid(index)) {
         return;
     }
     tasks[index - 1].description = newDescription;
 }
 
 void TodoList::SetDueDate(const int index, const std::tm& date) {
-    if (index < 1 || index > tasks.size()) {
-        std::cerr << RED << "Invalid index." << DEFAULT;
-        Sleep(1000);
+    if (!IsIndexValid(index)) {
         return;
     }
     tasks[index - 1].dueDate = date;
@@ -173,6 +163,16 @@ TodoList::Commands TodoList::StrToCommand(const std::string& str) {
         return QUIT;
     } else {
         return UNKNOWN;
+    }
+}
+
+bool TodoList::IsIndexValid(const int index) {
+    if (index < 1 || index > tasks.size()) {
+        std::cerr << RED << "Invalid index." << DEFAULT;
+        Sleep(1000);
+        return false;
+    } else {
+        return true;
     }
 }
 
