@@ -52,6 +52,7 @@ void TodoList::MarkCompleted(const int index) {
         return;
     }
     tasks[index - 1].isCompleted = true;
+    MoveTask(index, tasks.size());
 }
 
 void TodoList::MarkNotCompleted(const int index) {
@@ -59,6 +60,7 @@ void TodoList::MarkNotCompleted(const int index) {
         return;
     }
     tasks[index - 1].isCompleted = false;
+    MoveTask(index, 1);
 }
 
 void TodoList::SetDescription(const int index, const std::string& newDescription) {
@@ -66,6 +68,15 @@ void TodoList::SetDescription(const int index, const std::string& newDescription
         return;
     }
     tasks[index - 1].description = newDescription;
+}
+
+void TodoList::MoveTask(const int oldIndex, const int newIndex) {
+    if (!IsIndexValid(oldIndex) || !IsIndexValid(newIndex)) {
+        return;
+    }
+    Task task = tasks[oldIndex - 1];
+    tasks.erase(tasks.begin() + (oldIndex - 1));
+    tasks.insert(tasks.begin() + (newIndex - 1), task);
 }
 
 void TodoList::SetDueDate(const int index, const std::tm& date) {
@@ -161,6 +172,8 @@ TodoList::Commands TodoList::StrToCommand(const std::string& str) {
         return UNCOMPLETE;
     } else if (str == "rn") {
         return RENAME;
+    } else if (str == "mv") {
+        return MOVE;
     } else if (str == "due") {
         return SET_DUE_DATE;
     } else if (str == "help") {

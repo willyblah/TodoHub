@@ -19,6 +19,7 @@ public:
         COMPLETE,
         UNCOMPLETE,
         RENAME,
+        MOVE,
         SET_DUE_DATE,
         HELP,
         QUIT,
@@ -42,6 +43,9 @@ public:
 
     // Sets the description of the task at a specified index.
     void SetDescription(const int index, const std::string& newDescription);
+
+    // Moves the task at `oldIndex` to `newIndex`.
+    void MoveTask(const int oldIndex, const int newIndex);
 
     // Sets the due date of the task at a specified intex.
     void SetDueDate(const int index, const std::tm& date);

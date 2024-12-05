@@ -103,6 +103,29 @@ int main() {
                     actionDone = true;
                     break;
                 }
+                case TodoList::Commands::MOVE: {
+                    string oldIndex, newIndex;
+                    cin >> oldIndex >> newIndex;
+                    try {
+                        stoi(oldIndex);
+                    } catch (const invalid_argument& e) {
+                        cerr << RED << "Parameter " << oldIndex << " is not an integer." << DEFAULT;
+                        TodoList::Sleep(1000);
+                        actionDone = true;
+                        break;
+                    }
+                    try {
+                        stoi(newIndex);
+                    } catch (const invalid_argument& e) {
+                        cerr << RED << "Parameter " << newIndex << " is not an integer." << DEFAULT;
+                        TodoList::Sleep(1000);
+                        actionDone = true;
+                        break;
+                    }
+                    todoList.MoveTask(stoi(oldIndex), stoi(newIndex));
+                    actionDone = true;
+                    break;
+                }
                 case TodoList::Commands::SET_DUE_DATE: {
                     string index, dateStr;
                     cin >> index >> dateStr;
