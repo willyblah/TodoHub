@@ -59,8 +59,10 @@ void TodoList::MarkNotCompleted(const int index) {
     if (!IsIndexValid(index)) {
         return;
     }
-    tasks[index - 1].isCompleted = false;
-    MoveTask(index, 1);
+    if (tasks[index - 1].isCompleted == true) {
+        tasks[index - 1].isCompleted = false;
+        MoveTask(index, 1);
+    }
 }
 
 void TodoList::SetDescription(const int index, const std::string& newDescription) {
