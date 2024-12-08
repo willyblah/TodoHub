@@ -88,6 +88,13 @@ void TodoList::SetDueDate(const int index, const std::tm& date) {
     tasks[index - 1].dueDate = date;
 }
 
+void TodoList::ClearDueDate(const int index) {
+    if (!IsIndexValid(index)) {
+        return;
+    }
+    tasks[index - 1].dueDate = {};
+}
+
 void TodoList::ViewHelp() {
     std::string originalWorkingDirectory = std::filesystem::current_path().string();
 
@@ -178,6 +185,8 @@ TodoList::Commands TodoList::StrToCommand(const std::string& str) {
         return MOVE;
     } else if (str == "due") {
         return SET_DUE_DATE;
+    } else if (str == "cldue") {
+        return CLEAR_DUE_DATE;
     } else if (str == "help") {
         return HELP;
     } else if (str == "q") {

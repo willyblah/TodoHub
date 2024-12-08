@@ -150,6 +150,21 @@ int main() {
                     actionDone = true;
                     break;
                 }
+                case TodoList::Commands::CLEAR_DUE_DATE: {
+                    string index;
+                    cin >> index;
+                    try {
+                        stoi(index);
+                    } catch (const invalid_argument& e) {
+                        cerr << RED << "Parameter " << index << " is not an integer." << DEFAULT;
+                        TodoList::Sleep(1000);
+                        actionDone = true;
+                        break;
+                    }
+                    todoList.ClearDueDate(stoi(index));
+                    actionDone = true;
+                    break;
+                }
                 case TodoList::Commands::HELP:
                     todoList.ViewHelp();
                     actionDone = true;
