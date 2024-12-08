@@ -1,5 +1,6 @@
 // Main.cpp - the entry point and logic for Todo Hub
 
+#include <cctype>
 #include <ctime>
 #include <iomanip>
 #include <iostream>
@@ -162,6 +163,19 @@ int main() {
                         break;
                     }
                     todoList.ClearDueDate(stoi(index));
+                    actionDone = true;
+                    break;
+                }
+                case TodoList::Commands::CLEAR: {
+                    cout << "Are you sure you want to clear all tasks? Type Y to confirm: ";
+                    char choice;
+                    cin >> choice;
+                    if (toupper(choice) == 'Y') {
+                        todoList.ClearTodoList();
+                    } else {
+                        cout << "Canceled.";
+                        TodoList::Sleep(1000);
+                    }
                     actionDone = true;
                     break;
                 }

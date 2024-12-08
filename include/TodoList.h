@@ -22,6 +22,7 @@ public:
         MOVE,
         SET_DUE_DATE,
         CLEAR_DUE_DATE,
+        CLEAR,
         HELP,
         QUIT,
         UNKNOWN
@@ -51,8 +52,11 @@ public:
     // Sets the due date of the task at a specified intex.
     void SetDueDate(const int index, const std::tm& date);
 
-    // Clear the due date of the task at a specified index.
+    // Clears the due date of the task at a specified index.
     void ClearDueDate(const int index);
+
+    // Clears the entire to-do list.
+    void ClearTodoList();
 
     // Displays the help document (docs/help.txt).
     void ViewHelp();
