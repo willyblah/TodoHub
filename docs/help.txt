@@ -29,7 +29,35 @@ Parameters:  the index of the task you want to rename, the new description
 Description: Renames a task.
 Example:     rn 3 New task name
 
+Command:     mv
+Parameters:  the current index of the task you want to move, the new index
+Description: Moves a task.
+Example:     Suppose that you have this to-do list:
+             1. Task A
+             2. Task B
+             3. Task C
+             In this case, 'mv 3 1' will result in this:
+             1. Task C
+             2. Task A
+             3. Task B
+
+Command:     due
+Parameters:  the index of the task you want to set a due date for,
+             the due date in YYYY/MM/DD format
+Description: Sets a due date for a task.
+Example:     due 3 2024/5/18
+
+Command:     cldue
+Parameter:   the index of the task with the due date you want to remove
+Description: Clears the due date of a task.
+Example:     cldue 3
+
+Command:     clear
+Parameters:  none
+Description: Clears all the tasks in the to-do list.
+Example:     clear
+
 Command:     q
-Parameters:  None
+Parameters:  none
 Description: Quits Todo Hub.
 Example:     q
