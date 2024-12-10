@@ -20,7 +20,7 @@ void TodoList::DisplayTasks() {
     int i = 1;
     for (const Task& task : tasks) {
         std::cout << BOLD << i << ". " << task.description << DEFAULT;
-        if (task.dueDate.tm_year >= 0 && task.dueDate.tm_mon >= 0 && task.dueDate.tm_mday > 0) {
+        if (task.dueDate.tm_mday > 0) {
             std::time_t now = std::time(nullptr);
             std::tm* nowTm = std::localtime(&now);
             if (nowTm->tm_year == task.dueDate.tm_year && nowTm->tm_mon == task.dueDate.tm_mon && nowTm->tm_mday == task.dueDate.tm_mday) {
