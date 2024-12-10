@@ -190,6 +190,7 @@ int main() {
                     cerr << RED << "Invalid command." << DEFAULT;
                     break;
             }
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
 }
